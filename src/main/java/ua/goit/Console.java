@@ -1,8 +1,6 @@
 package ua.goit;
 
-import ua.goit.Commands.CommandHandler;
-import ua.goit.Commands.Get;
-import ua.goit.Commands.Post;
+import ua.goit.Commands.*;
 
 import java.util.*;
 
@@ -17,19 +15,26 @@ public class Console {
 
         commandMap.put("GET", new Get(scanner));
         commandMap.put("POST", new Post(scanner));
-        commandMap.put("PUT", new Post(scanner));
-        commandMap.put("DELETE", new Post(scanner));
+        commandMap.put("PUT", new Put(scanner));
+        commandMap.put("DELETE", new Delete(scanner));
 
         printWelcomeMessage();
 
         while (true) {
             printInstructionForRequests();
-            String input = scanner.nextLine().toLowerCase();
+            String input = scanner.nextLine().toUpperCase();
 
-            if (input.equals("exit")) {
+            if (input.equalsIgnoreCase("exit")) {
                 System.out.println("Exiting from app...");
                 break;
             }
+
+            if (!requestList.contains(input)) {
+                printErrorMessage("Your input is not correct");
+                continue;
+            }
+
+            commandMap.get(input).handle();
         }
     }
 
@@ -39,7 +44,7 @@ public class Console {
     }
 
     public static void printInstructionForRequests() {
-        System.out.println("Following requests are supported:\n" + requestList.toString() + "\nTo exit enter: exit");
+        System.out.println("Following requests are supported:\n" + requestList + "\nTo exit enter: exit");
     }
 
     public static void printErrorMessage(String msg) {

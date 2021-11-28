@@ -24,7 +24,7 @@ public class Get implements CommandHandler {
         while (true) {
             Console.printMethodInstruction("GET");
 
-            String input = scanner.nextLine().toLowerCase();
+            String input = scanner.nextLine().toLowerCase().trim();
 
             if (input.equals("exit")) {
                 System.out.println("You will be returned to main menu");
@@ -66,10 +66,10 @@ public class Get implements CommandHandler {
         HttpClient httpClient = HttpClient.newBuilder().build();
 
         while (true) {
-            System.out.println("You can get pet by id or status\n" + "To get a pet by id - print id\n"
-                    + "Otherwise print status");
+            System.out.println("You can get pet by id or status\n" + "To get a pet by id - enter id\n"
+                    + "Otherwise enter status");
 
-            String input = scanner.nextLine().toLowerCase();
+            String input = scanner.nextLine().toLowerCase().trim();
 
             if (!(input.equals("id") || input.equals("status"))) {
                 Console.printErrorMessage("Please enter \"id\" or \"status\"");
@@ -99,7 +99,7 @@ public class Get implements CommandHandler {
             } else {
                 System.out.println("Please enter one of the following statuses: \n" + Console.statusList);
 
-                String status = scanner.nextLine().toLowerCase();
+                String status = scanner.nextLine().toLowerCase().trim();
 
                 if (!Console.statusList.contains(status)) {
                     Console.printErrorMessage("You entered an invalid status");
@@ -129,7 +129,7 @@ public class Get implements CommandHandler {
             System.out.println("You can get inventories by status - enter \"inventory\"\n" +
                     "You can find order by id - enter \"order\"\n");
 
-            String input = scanner.nextLine().toLowerCase();
+            String input = scanner.nextLine().toLowerCase().trim();
 
             if (!(input.equals("inventory") || input.equals("order"))) {
                 Console.printErrorMessage("Please enter \"inventory\" or \"order\"");
@@ -152,13 +152,13 @@ public class Get implements CommandHandler {
                 long id;
 
                 try {
-                    id = Long.parseLong(scanner.nextLine());
+                    id = Long.parseLong(scanner.nextLine().trim());
                 } catch (NumberFormatException e) {
                     Console.printErrorMessage("You entered an invalid id");
                     continue;
                 }
 
-                HttpRequest request = HttpRequest.newBuilder().uri(new URI(url + "order/=" + id)).build();
+                HttpRequest request = HttpRequest.newBuilder().uri(new URI(url + "order/" + id)).build();
                 try {
                     HttpResponse<Stream<String>> response = httpClient.send(request, HttpResponse.BodyHandlers.ofLines());
                     System.out.println(response.statusCode());
@@ -182,7 +182,7 @@ public class Get implements CommandHandler {
                     + "You can log in into the system with username and password - enter \"login\"\n"
                     + "You can log out from the system - enter \"logout\"\n");
 
-            String input = scanner.nextLine().toLowerCase();
+            String input = scanner.nextLine().toLowerCase().trim();
 
             if (!(input.equals("get") || input.equals("login") || input.equals("logout"))) {
                 Console.printErrorMessage("Please enter \"get\" or \"login\" or \"logout\"");

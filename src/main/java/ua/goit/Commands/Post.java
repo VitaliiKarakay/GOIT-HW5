@@ -28,7 +28,7 @@ public class Post implements CommandHandler {
         while (true) {
             Console.printMethodInstruction("POST");
 
-            String input = scanner.nextLine().toLowerCase();
+            String input = scanner.nextLine().toLowerCase().trim();
             if (input.equals("exit")) {
                 System.out.println("You will be returned to main menu");
                 break;
@@ -102,7 +102,7 @@ public class Post implements CommandHandler {
                     + "To create one user - enter \"one\"\n"
                     + "To create multiple users -enter \"multiple\"");
 
-            String input = scanner.nextLine().toLowerCase();
+            String input = scanner.nextLine().toLowerCase().trim();
 
             if (!(input.equals("one") || (input.equals("multiple")))) {
                 Console.printErrorMessage("Please enter \"one\" or \"multiple\"");
@@ -163,7 +163,7 @@ public class Post implements CommandHandler {
                     + "You can create a pet by specifying a path to a Json file - enter \"create\"\n"
                     + "You can update an existing pet by specifying its id new name and new status - enter \"update\"");
 
-            String input = scanner.nextLine().toLowerCase();
+            String input = scanner.nextLine().toLowerCase().trim();
 
             if (!(input.equals("picture") || input.equals("create") || input.equals("update"))) {
                 Console.printErrorMessage("Please enter \"picture\" or \"create\" or \"update\"");
@@ -181,9 +181,9 @@ public class Post implements CommandHandler {
                 }
 
                 System.out.println("Enter the new name of your pet");
-                String name = scanner.nextLine();
+                String name = scanner.nextLine().trim();
                 System.out.println("Enter the new status of your pet");
-                String status = scanner.nextLine();
+                String status = scanner.nextLine().trim();
 
                 if (!Console.statusList.contains(status)) {
                     Console.printErrorMessage("Invalid status! Try again.");
