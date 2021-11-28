@@ -2,19 +2,16 @@ package ua.goit.Commands;
 
 import ua.goit.Console;
 
-import javax.imageio.plugins.tiff.GeoTIFFTagSet;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.SQLOutput;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-public class Get implements CommandHandler{
+public class Get implements CommandHandler {
 
     private Scanner scanner;
 
@@ -43,19 +40,22 @@ public class Get implements CommandHandler{
                         pet();
                     } catch (Exception e) {
                         Console.printErrorMessage("Unknown request");
-                    } break;
+                    }
+                    break;
                 case "store":
                     try {
                         store();
                     } catch (Exception e) {
                         Console.printErrorMessage("Unknown request");
-                    } break;
+                    }
+                    break;
                 case "user":
                     try {
                         user();
                     } catch (Exception e) {
                         Console.printErrorMessage("Unknown request");
-                    } break;
+                    }
+                    break;
             }
         }
     }
@@ -67,7 +67,7 @@ public class Get implements CommandHandler{
 
         while (true) {
             System.out.println("You can get pet by id or status\n" + "To get a pet by id - print id\n"
-            + "Otherwise print status");
+                    + "Otherwise print status");
 
             String input = scanner.nextLine().toLowerCase();
 
@@ -79,7 +79,7 @@ public class Get implements CommandHandler{
             if (input.equals("id")) {
                 System.out.println("Please enter the id of a pet");
 
-                long id = 0;
+                long id;
                 try {
                     id = Long.parseLong(scanner.nextLine());
                 } catch (NumberFormatException e) {
@@ -115,7 +115,8 @@ public class Get implements CommandHandler{
                     Console.printErrorMessage("GET request was unsuccessful, try again.");
                     continue;
                 }
-            } break;
+            }
+            break;
         }
     }
 
@@ -126,7 +127,7 @@ public class Get implements CommandHandler{
 
         while (true) {
             System.out.println("You can get inventories by status - enter \"inventory\"\n" +
-                            "You can find order by id - enter \"order\"\n");
+                    "You can find order by id - enter \"order\"\n");
 
             String input = scanner.nextLine().toLowerCase();
 
@@ -148,11 +149,11 @@ public class Get implements CommandHandler{
             } else {
                 System.out.println("Please enter the id of an order");
 
-                long id = 0;
+                long id;
 
                 try {
                     id = Long.parseLong(scanner.nextLine());
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     Console.printErrorMessage("You entered an invalid id");
                     continue;
                 }
@@ -166,7 +167,8 @@ public class Get implements CommandHandler{
                     Console.printErrorMessage("GET request was unsuccessful, try again.");
                     continue;
                 }
-            } break;
+            }
+            break;
         }
     }
 
@@ -174,8 +176,6 @@ public class Get implements CommandHandler{
         String url = "https://petstore.swagger.io/v2/user/";
 
         HttpClient httpClient = HttpClient.newBuilder().build();
-
-
 
         while (true) {
             System.out.println("You can get user by the username - enter \"get\"\n"
@@ -203,7 +203,7 @@ public class Get implements CommandHandler{
                     Console.printErrorMessage("HTTP GET request was unsuccessful, try again.");
                     continue;
                 }
-            } else if (input.equals("login")){
+            } else if (input.equals("login")) {
                 System.out.println("Please enter username");
                 String username = scanner.nextLine();
                 System.out.println("Please enter password");
@@ -230,7 +230,8 @@ public class Get implements CommandHandler{
                     Console.printErrorMessage("GET request was unsuccessful, try again.");
                     continue;
                 }
-            } break;
+            }
+            break;
         }
     }
 }
